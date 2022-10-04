@@ -1,0 +1,86 @@
+from guizero import *  #window is second form
+import sqlite3
+from sqlite3 import Error
+#Import SQL
+import os
+import os.path
+#Import datetime
+import datetime
+
+
+sql = """
+CREATE TABLE "CustomerTbl" ( 
+"CustomerID" INTEGER NOT NULL,
+"User_name" TEXT,
+"Password" TEXT,
+"Fname" TEXT,
+"Sname" TEXT,
+"Email" TEXT,
+"Phonenumber" TEXT, 
+PRIMARY KEY("CustomerID" AUTOINCREMENT)
+);
+CREATE TABLE "ReviewTbl" (
+"ReviewID"  INTEGER NOT NULL,
+"ReviewWriteup" STRING,
+"Topic" STRING,
+"ReviewDate"  Date,
+"CustomerID"  INTEGER,
+PRIMARY KEY("ReviewID" AUTOINCREMENT),
+CONSTRAINT "CustomerID_fk"  FOREIGN KEY("CustomerID") REFERENCES "CustomerTbl"("CustomerID")
+);
+insert into CustomerTbl (User_name, Password, Fname, Sname, Phonenumber, Email) values ('userjoe','pass', 'Joe', 'Harris', '010103', 'joe.@outlook.com');
+insert into CustomerTbl (User_name, Password, Fname, Sname, Phonenumber, Email) values ('userfred','pass', 'Fred', 'Harrisr', '010101', 'fred.@outlook.com');
+insert into CustomerTbl (User_name, Password, Fname, Sname, Phonenumber, Email) values ('userJam','pass', 'Jam', 'Harrisr', '010101', 'jam.@outlook.com');
+insert into ReviewTbl (ReviewWriteup, ReviewDate, Topic, CustomerID) values ('Need more style', '6/09/2022', 'Style', 1);
+insert into ReviewTbl (ReviewWriteup, ReviewDate, Topic, CustomerID) values ('bad', '6/09/2022', 'Bad', 2);
+insert into ReviewTbl (ReviewWriteup, ReviewDate, Topic, CustomerID) values ('is a good sign up easy and quick', '6/09/2022', 'Good', 2);
+insert into ReviewTbl (ReviewWriteup, ReviewDate, Topic, CustomerID) values ('live fire is uses i was not told this when signign up', '6/09/2022', 'Live fire', 3);
+insert into ReviewTbl (ReviewWriteup, ReviewDate, Topic, CustomerID) values ('I was Shot by a famer.', '6/09/2022', 'injury', 3);
+insert into ReviewTbl (ReviewWriteup, ReviewDate, Topic, CustomerID) values ('i am now fat after leaving.', '6/09/2022', 'Size', 3);
+"""
+#
+#Global variables here
+#
+#
+database_file = 'UserApp.db'
+LoggedIn_ID = 1 # store customerID when logged in
+#
+#
+#
+#Delete the database, only if it exists
+#
+#
+if os.path.exists(database_file):
+   os.remove(database_file)
+#
+#Connect to the database
+conn = sqlite3.connect(database_file) #My connection is called 'conn'
+#Get a cursor pointing to the database
+cursor = conn.cursor()
+#Create the tables
+cursor.executescript(sql) # creates from DDL above, script more than 1 command
+#Commit to save everything
+conn.commit()
+#Close the connection to the database
+#
+#Queries the database using the database parameter as the database
+#to query and the query parameter as the actual query to issue
+# for SELECT
+#
+def query_database(database, query):
+	Lconn = sqlite3.connect(database)
+	cur = Lconn.cursor()			# use a local cursor
+	cur.execute(query)
+	rows = cur.fetchall()
+	cur.close()
+	return rows
+#
+#
+#Executes the sql statement to INSERT and UPDATE rows
+#
+def execute_sql(database, sql_statement):
+	Lconn = sqlite3.connect(database)
+	cur = Lconn.cursor()
+	cur.execute(sql_statement)
+	Lconn.commit()
+	return cur.lastrowid
