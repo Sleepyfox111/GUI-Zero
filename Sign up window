@@ -1,0 +1,50 @@
+def signup_user():  #### TEST WITH 'or 1 = 1; -- 
+	#this is where we validate the sign in window to make sure the user has entered the value for each box
+	if Uname.value == "":
+		info("Error", "You must enter a valid username")
+	elif len(Uname.value) < 3 or len(Uname.value) > 12 :
+		info("Error", "Please enter a Username between 3 and 12 charaters")
+	elif len(Pword.value) < 5 or len(Pword.value) > 20:
+		info("Error", "Your Password must be between 5 and 20 characters")
+	elif Fname.value == "":
+		info("Error", "You must enter a First name")
+	elif Sname.value == "":
+		info("Error", "You must enter a Surname")
+	elif len(Num.value) < 11 and Num.value.isnumeric() == False:
+		info("Error", "You must enter a Valid phone number")
+	elif "@" not in Email.value:
+		info("Error", "You must enter a Email address")
+	else:
+		InsertDataSQL = ("INSERT INTO CustomerTbl(User_name, Password, Fname, Sname, Phonenumber, Email ) VALUES ('"+ str(Uname.value) + "', '" + str(Pword.value) + "', '" + str(Fname.value) + "', '" +str(Sname.value)+ "', '" +str(Num.value) + "', '" +str(Email.value)+ "')")
+		execute_sql(database_file, InsertDataSQL)
+		info("Success","You are now registered as:" + Fname.value)	
+    #############################################################
+    ##############################################################
+    text_blank = Text(signup, text="")
+text_blank = Text(signup, text=" Welcome to Army recruitment centre ")
+text_blank = Text(signup, text="")
+##
+text = Text(signup, text= "Enter a User name")
+Uname = TextBox(signup, text="")
+#
+text = Text(signup, text= "Enter a Password")
+Pword = TextBox(signup)
+#
+text = Text(signup, text= "Enter a First Name")
+Fname = TextBox(signup)
+#
+text = Text(signup, text= "Enter a Surname")
+Sname = TextBox(signup)
+#
+text = Text(signup, text= "Enter Phone number")
+Num = TextBox(signup)
+#
+text = Text(signup, text= "Enter Email")
+Email = TextBox(signup)
+##
+text_blank = Text(signup, text="")
+text_blank = Text(signup, text="")
+#
+open_button = PushButton(signup, text="Sign up", command=signup_user) # button on app, main window
+
+Back_button = PushButton(signup, text="Back", align="bottom" ,command=Back)
