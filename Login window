@@ -1,0 +1,42 @@
+def login_user():  #### TEST WITH 'or 1 = 1; -- 
+	#this is where we make sure when the user login they are in the database
+	global LoggedIn_ID ## variable needed to know who logged in ##
+	if login1_name.value == "":
+		info("Username Incorecct", "you must enter a valid Username")
+	elif Password.value == "":
+		info("Password Error", "You must enter a valid Password")
+	else:
+		username = login1_name.value
+		sqlselect = "SELECT * FROM CustomerTbl WHERE User_name = '"+username+"'"
+		rows = query_database(database_file, sqlselect)
+		if len(rows) == 0: ### This checks that the user was found ###
+			info("Accont Error","Account not Found")
+		else:
+		
+			# check pw
+			DBP = rows[0][2]
+			if DBP == Password.value:
+				info("Log in","You have successfully logged in")
+				LoggedIn_ID = rows [0][0]
+				todaynow = datetime.date.today()
+				formatted_now = todaynow.strftime("%d/%m/%Y, %h")
+				ReviewDate.value = formatted_now
+				Review_window()
+
+####################################################
+
+text = Text(login, text= "Enter Username")
+login1_name = TextBox(login, text="")
+#
+text_blank = Text(login, text="")
+text = Text(login, text= "Enter Password")
+Password = TextBox(login, text="")
+#
+Check=CheckBox(login, text="remember me")
+#
+
+open_button = PushButton(login, text="log in", command=login_user) # button on app, main window
+
+#
+buttons_box = Box(login, width="fill", align="bottom")
+Back_button = PushButton(buttons_box, text="Back",command=Back, align="right")
