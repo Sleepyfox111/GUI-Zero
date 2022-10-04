@@ -1,0 +1,53 @@
+def submit_file():
+	#allow the user to submit there review.
+	if Topic.value == "":
+		info("Submit Error", "You must enter a Topic")
+	else:
+		InsertdataSQL = ("INSERT INTO ReviewTbl(ReviewWriteup, ReviewDate, Topic, CustomerID) VALUES ('"+ str(ReviewWriteup.value) + "', '" + str(ReviewDate.value) + "', '" + str(Topic.value) + "', '" +str(LoggedIn_ID)+"')")	
+		execute_sql(database_file,InsertdataSQL)
+		info("Success","Your Review has been submited:")
+		Review.hide()
+		app.show()
+
+############################################################################
+############################################################################
+def change_text_size():
+	#this allow the user to change size. this allows people with eye problems to read easyer
+   ReviewWriteup.text_size = size.value
+#######################################
+def change_font():
+	#allows the user to change there font to there prefered.
+    Review.font = font.value
+
+
+
+
+#############################################################################
+##this is where we build the review window when the user has signed in
+##
+file_controls = Box(Review, align="top", width="fill", layout="grid")
+##
+file_Topic = Text(file_controls, text="Topic", width=10, grid=[0,0])
+Topic = TextBox(file_controls, text="", width=50, grid=[1,0])
+##
+#file_Date = Text(file_controls, text="Date:", width=10, grid=[2,0])
+ReviewDate = Text(file_controls, text="", width=20,grid = [3,0])
+
+##
+ReviewWriteup = TextBox(Review, multiline=True, height="fill", width="fill")
+##
+preferences_controls = Box(Review, align="bottom", width="fill", border=True)
+font = Combo(preferences_controls, options=["courier", "times new roman",
+"verdana","comic sans"], align="left", command=change_font)
+##
+size = Slider(preferences_controls, align="left",
+command=change_text_size, start=10, end=45)
+##
+Submit_Button = PushButton(preferences_controls, text="Submit", align="right",  command =submit_file)
+##
+Review.bg="white"
+##
+ReviewWriteup.resize(1, 1)
+ReviewWriteup.resize("fill", "fill")
+##
+app.display()	
