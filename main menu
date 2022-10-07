@@ -1,0 +1,46 @@
+def Login():
+	# this will show the user a loggin window and hide the menu
+	app.hide()
+	login.show()
+	#
+	#
+def Signup():
+	# show to user a sign up window to allow them to create an account
+	app.hide()
+	signup.show()
+
+def Back():
+	#this allow the user to go back from the page they are on and take them back to the main menu
+	login.hide()
+	signup.hide()
+	app.show()
+def Exit():
+	# when exit is pressed it ends the program
+	app.destroy()
+
+
+#################################
+# build main window             #
+#################################
+#this builds the main window where the user can choose to login or sign up
+app = App(title="Royal Marines", height = 400, width=400)
+login = Window(app, title="login", height=300, width=550)
+signup = Window(app, title="Sign Up", height=500, width=500)
+Review = Window(app, title="Review", height=600, width=500)
+#
+login.hide()
+signup.hide()
+Review.hide()
+#
+text_blank = Text(app, text="")
+text_blank = Text(app, text=" Welcome to Royal Marines Review centre ")
+text_blank = Text(app, text="")
+#
+user_textbox = PushButton(app, text="Login", command=Login, width=15)
+Text_blank = Text(app, text="")
+#
+signup1 = PushButton(app, text="Sign Up", command=Signup, width=15)
+#
+Exit = PushButton(app, text="Exit", align="bottom", command=Exit, width=15)
+#
+app.bg="green"
