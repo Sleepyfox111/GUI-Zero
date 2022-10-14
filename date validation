@@ -1,0 +1,24 @@
+def check_date(Mydate): # found on geeks for geeks
+# initializing format
+	format = "%d/%m/%Y"
+ 	# checking if format matches the date
+	res = True
+ 	# using try-except to check for truth value
+	try:
+		res = bool(datetime.strptime(Mydate, format))
+	except ValueError:
+		res = False
+	return res
+######
+########################
+isValidDate = check_date(BookingDate.value) #this is where the date gets validated and make sure its in the correct format
+	#
+	if (isValidDate):
+		FDate.value = BookingDate.value
+		FTime.value = BookTime.value
+		FAdults.value = Adults.value
+		FKids.value = Kids.value
+		Booking.hide()
+		confirm.show()
+	else:
+		info("Date Error","must be in  a valid format dd/mm/yyyy ")
