@@ -1,0 +1,16 @@
+def Dark_Mode():
+	#this is for accsessiblity for the user incase they struggle to see on a white back round
+	app.bg = "#434343"
+	app.text_color = "#eef2f3"
+#################
+def Light_Mode():
+	#this is for accsessiblity for the user incase they struggle to see on a Black back round
+	app.bg = "#eef2f3"
+	app.text_color = "#434343"
+################
+def Zoom():
+	app.text_size = Size.value
+#################
+Lightmode = PushButton(Accsesibllity, text="Light Mode", command=Light_Mode, width =8,  align ="left")
+Darkmode = PushButton(Accsesibllity, text="Dark Mode", command=Dark_Mode, width =8, align ="left")
+Size = Slider(Accsesibllity, command=Zoom, start = 8, end=20, align="right")
