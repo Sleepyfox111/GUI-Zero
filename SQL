@@ -29,14 +29,7 @@ PRIMARY KEY("ReviewID" AUTOINCREMENT),
 CONSTRAINT "CustomerID_fk"  FOREIGN KEY("CustomerID") REFERENCES "CustomerTbl"("CustomerID")
 );
 insert into CustomerTbl (User_name, Password, Fname, Sname, Phonenumber, Email) values ('userjoe','pass', 'Joe', 'Harris', '010103', 'joe.@outlook.com');
-insert into CustomerTbl (User_name, Password, Fname, Sname, Phonenumber, Email) values ('userfred','pass', 'Fred', 'Harrisr', '010101', 'fred.@outlook.com');
-insert into CustomerTbl (User_name, Password, Fname, Sname, Phonenumber, Email) values ('userJam','pass', 'Jam', 'Harrisr', '010101', 'jam.@outlook.com');
 insert into ReviewTbl (ReviewWriteup, ReviewDate, Topic, CustomerID) values ('Need more style', '6/09/2022', 'Style', 1);
-insert into ReviewTbl (ReviewWriteup, ReviewDate, Topic, CustomerID) values ('bad', '6/09/2022', 'Bad', 2);
-insert into ReviewTbl (ReviewWriteup, ReviewDate, Topic, CustomerID) values ('is a good sign up easy and quick', '6/09/2022', 'Good', 2);
-insert into ReviewTbl (ReviewWriteup, ReviewDate, Topic, CustomerID) values ('live fire is uses i was not told this when signign up', '6/09/2022', 'Live fire', 3);
-insert into ReviewTbl (ReviewWriteup, ReviewDate, Topic, CustomerID) values ('I was Shot by a famer.', '6/09/2022', 'injury', 3);
-insert into ReviewTbl (ReviewWriteup, ReviewDate, Topic, CustomerID) values ('i am now fat after leaving.', '6/09/2022', 'Size', 3);
 """
 #
 #Global variables here
