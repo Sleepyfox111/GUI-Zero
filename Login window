@@ -1,4 +1,4 @@
-def login_user():  #### TEST WITH 'or 1 = 1; -- 
+def login_user():
 	#this is where we make sure when the user login they are in the database
 	global LoggedIn_ID ## variable needed to know who logged in ##
 	if login1_name.value == "":
