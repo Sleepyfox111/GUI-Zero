@@ -1,4 +1,4 @@
-def signup_user():  #### TEST WITH 'or 1 = 1; -- 
+def signup_user(): 
 	#this is where we validate the sign in window to make sure the user has entered the value for each box
 	if Uname.value == "":
 		info("Error", "You must enter a valid username")
