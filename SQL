@@ -40,7 +40,7 @@ LoggedIn_ID = 1 # store customerID when logged in
 #
 #
 #
-#Delete the database, only if it exists
+#Delete the database if it exists
 #
 #
 if os.path.exists(database_file):
@@ -62,7 +62,7 @@ conn.commit()
 #
 def query_database(database, query):
 	Lconn = sqlite3.connect(database)
-	cur = Lconn.cursor()			# use a local cursor
+	cur = Lconn.cursor()			# use a local cursor called cur
 	cur.execute(query)
 	rows = cur.fetchall()
 	cur.close()
