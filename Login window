@@ -1,27 +1,29 @@
 def login_user():
 	#this is where we make sure when the user login they are in the database
 	global LoggedIn_ID ## variable needed to know who logged in ##
-	if login1_name.value == "":
-		info("Username Incorecct", "you must enter a valid Username")
-	elif Password.value == "":
+	if login1_name.value == "":#check if textbox is blank
+		info("Username Incorect", "you must enter a valid Username")
+	elif login1_name.value.isalpha() == False:# check the username is they have ented any special characters
+		info("Login Incorrect", "No special character in Username")
+	elif Password.value == "":#check if textbox is blank
 		info("Password Error", "You must enter a valid Password")
 	else:
-		username = login1_name.value
-		sqlselect = "SELECT * FROM CustomerTbl WHERE User_name = '"+username+"'"
+		username = login1_name.value#check the database for the username
+		sqlselect = "SELECT * FROM UserTbl WHERE Username = '"+username+"'"
 		rows = query_database(database_file, sqlselect)
 		if len(rows) == 0: ### This checks that the user was found ###
-			info("Accont Error","Account not Found")
+			info("Accont Error","Account not Found Please Check Username and Password")
 		else:
-		
 			# check pw
-			DBP = rows[0][2]
-			if DBP == Password.value:
+			pw = Password.value
+			hashlib.sha512(pw.encode('utf8')).hexdigest()
+			if pw  == Password.value:
+				#show info if password is found moving you onto booking
 				info("Log in","You have successfully logged in")
 				LoggedIn_ID = rows [0][0]
-				todaynow = datetime.date.today()
-				formatted_now = todaynow.strftime("%d/%m/%Y, %h")
-				ReviewDate.value = formatted_now
-				Review_window()
+				main()
+			else:
+				info("Accont Error","Account not Found Please Check Username and Password")
 
 ####################################################
 
